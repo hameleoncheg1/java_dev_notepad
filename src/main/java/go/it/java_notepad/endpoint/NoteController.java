@@ -3,6 +3,7 @@ package go.it.java_notepad.endpoint;
 import go.it.java_notepad.entity.Note;
 import go.it.java_notepad.service.NoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

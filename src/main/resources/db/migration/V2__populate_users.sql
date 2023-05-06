@@ -1,9 +1,9 @@
-INSERT INTO USERS (USERNAME, PASSWORD, ROLE, ENABLED, EMAIL)
-VALUES ('user',
+INSERT INTO USERS (EMAIL, PASSWORD, ROLE, ENABLED)
+VALUES ('syrovatkaaroslav@gmail.com',
 '{noop}user',
-'ROLE_USER', 1,'syrovatkaaroslav@gmail.com');
+'ROLE_USER', 1);
 
-INSERT INTO USERS (USERNAME, PASSWORD, ROLE, ENABLED, EMAIL)
-VALUES ('admin',
+INSERT INTO USERS (EMAIL, PASSWORD, ROLE, ENABLED)
+VALUES ('hameleoncheg@gmail.com',
 '{noop}admin',
-'ROLE_ADMIN', 1,'hameleoncheg@gmail.com');
+'ROLE_ADMIN', 1);
