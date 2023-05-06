@@ -31,6 +31,6 @@ public class WebSecurityConfig {
     }
     @Bean
     public UserDetailsService userDetailsService(){
-        return userRepository::findByUsername;
+        return userRepository::findByEmail;
     }
 }
