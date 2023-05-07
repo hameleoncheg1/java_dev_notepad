@@ -35,8 +35,8 @@ private final CustomAuthProvider authProvider;
                 .httpBasic()
                 .and()
                     .formLogin()
-//                    .loginPage("/login")
-                .permitAll()
+                    .loginPage("/login")
+                    .permitAll()
         ;
 
         return http.build();
