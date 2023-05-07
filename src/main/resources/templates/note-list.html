@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+  <style>
+    a{
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+    #hello-user{
+      align-items: center;
+      display: flex;
+    }
+    body {
+    background-image: url("/assets/img/bg-masthead.jpg");
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: center;
+    }
+  </style>
+  <title>Нотатки</title>
+</head>
+<body>
+<div class="container-sm">
+  <nav class="nav justify-content-between">
+    <ul class="nav">
+      <li class="nav-item p-2">
+      <a href="/note/create" type="button" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+        Додати нотатку
+      </a>
+      </li>
+      <li class="nav-item p-2">
+      <button type="button" class="btn btn-primary">
+        Всього нотаток <span class="badge bg-danger" th:text="${noteList.size()}">4</span>
+      </button>
+      </li>
+    </ul>
+    <ul class="nav">
+      <li class="nav-item p-2" id="hello-user" style="line-height: 100%;">
+        <span>Привіт, <b th:text="${author}">Користувач</b>!</span>
+      </li>
+      <li class="nav-item p-2">
+        <a href="/logout" type="button" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="display: inline-block; vertical-align: text-bottom;">
+            <path d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm10.44 4.5-1.97-1.97a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.97-1.97H6.75a.75.75 0 0 1 0-1.5Z">
+            </path>
+          </svg>
+          Вийти
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <h1 class="mt-2">Мої нотатки</h1>
+
+  <ul class="list-group">
+    <li class="list-group-item" th:each="note: ${noteList}" >
+      <div class="row justify-content-between"  >
+      <div class="col-sm card border-0" style="max-width: 100%">
+        <div class="card-body p-0">
+          <h5 class="card-title" th:text="${note.title}">Title</h5>
+          <p class="card-text" th:text="${note.content}">Content content content content content content content content content content content content content</p>
+        </div>
+      </div>
+      <ul class="col-md-auto list-group list-group-horizontal-md">
+        <li class="list-group-item p-1 border-0">
+          <div class="col-md-auto" th:switch="${note.getAccess()}">
+            <span class="btn btn-danger" th:case="'private'">Приватний доступ</span>
+            <span class="btn btn-success" th:case="'public'">Публічний доступ</span>
+          </div>
+        </li>
+        <li class="list-group-item p-1 border-0">
+          <a th:href="'/note/edit?id='+${note.getId()}" type="button" class="btn btn-warning">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg>
+          </a>
+        </li>
+        <li class="list-group-item p-1 border-0">
+          <form action="/note/delete" method="post">
+            <button type="submit" class="btn btn-danger">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+              </svg>
+            </button>
+            <input type="hidden" name="id" th:value="${note.getId()}" />
+          </form>
+        </li>
+	    <li class="list-group-item p-1 border-0">
+          <button th:data-link="'/note/share/'+${note.getId()}" type="button" class="btn btn-info copy-link-button" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" >
+              <path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+              </path>
+            </svg>
+          </button>
+        </li>
+      </ul>
+      </div>
+    </li>
+  </ul>
+</div>
+<script>
+    const copyLinkButtons = document.querySelectorAll('.copy-link-button');
+    copyLinkButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        copyLinkButtons.forEach(btn => {
+          btn.style.backgroundColor = '#0dcaf0';
+        })
+        const linkToCopy = button.getAttribute('data-link');
+        navigator.clipboard.writeText(window.location.host+linkToCopy);
+        button.style.backgroundColor = 'lime';
+      });
+    });
+</script>
+</body>
+</html>

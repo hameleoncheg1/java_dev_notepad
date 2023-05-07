@@ -18,8 +18,9 @@ public class NoteController {
     private final NoteService noteService;
     @GetMapping("/list")
     public ModelAndView list() {
-        ModelAndView result = new ModelAndView("notes");
-        result.addObject("noteList", noteService.listAll() );
+        ModelAndView result = new ModelAndView("note-list");
+        result.addObject("noteList", noteService.listAll());
+        result.addObject("author", noteService.author());
         return result;
     }
 
