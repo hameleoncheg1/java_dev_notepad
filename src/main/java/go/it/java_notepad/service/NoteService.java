@@ -1,5 +1,6 @@
 package go.it.java_notepad.service;
 import go.it.java_notepad.entity.Note;
+import go.it.java_notepad.entity.User;
 import go.it.java_notepad.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -54,4 +55,8 @@ public class NoteService {
         return note;
     }
 
+    public Long getUserId() {
+        final User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return principal.getUser_id();
+    }
 }
