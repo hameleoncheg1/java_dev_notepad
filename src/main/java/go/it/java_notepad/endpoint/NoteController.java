@@ -3,7 +3,6 @@ package go.it.java_notepad.endpoint;
 import go.it.java_notepad.entity.Note;
 import go.it.java_notepad.service.NoteService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +18,9 @@ public class NoteController {
     private final NoteService noteService;
     @GetMapping("/list")
     public ModelAndView list() {
-        ModelAndView result = new ModelAndView("notes");
-        result.addObject("noteList", noteService.listAll() );
+        ModelAndView result = new ModelAndView("note-list");
+        result.addObject("noteList", noteService.listAll());
+        result.addObject("author", noteService.author());
         return result;
     }
 
