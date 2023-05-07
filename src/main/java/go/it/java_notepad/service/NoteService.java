@@ -2,6 +2,9 @@ package go.it.java_notepad.service;
 import go.it.java_notepad.entity.Note;
 import go.it.java_notepad.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Random;
@@ -16,9 +19,17 @@ public class NoteService {
         return noteRepository.findAll();
     }
 
+    public String author() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        return authentication.getName();
+    }
+
     public Note add(Note note) {
         long id = random.nextLong();
         note.setId(id);
+        note.setUser_id(1L);
+        note.setAccess("private");
         noteRepository.save(note);
         return note;
     }

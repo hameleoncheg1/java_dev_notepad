@@ -14,10 +14,10 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
+    @Column(name = "email")
     private String username;
     private String password;
     private String role;
-    private String email;
     private int enabled;
 
     @Override
