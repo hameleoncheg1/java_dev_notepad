@@ -30,33 +30,42 @@ public class NoteController {
         return new RedirectView("/note/list");
     }
     @GetMapping("/edit")
-    public ModelAndView edit(@RequestParam long id){
-        ModelAndView result = new ModelAndView("addAndEdit");
+    public ModelAndView edit(@RequestParam long id) {
+        ModelAndView result = new ModelAndView("note-create-edit");
         result.addObject("note", noteService.getById(id));
         return result;
     }
 
     @PostMapping("/edit")
-    public RedirectView edit(@RequestParam long id, @RequestParam String title, @RequestParam String content) {
+    public RedirectView edit(@RequestParam long id,
+                             @RequestParam String title,
+                             @RequestParam String content,
+                             @RequestParam String accessType) {
         Note note = new Note();
         note.setId(id);
         note.setTitle(title);
         note.setContent(content);
+        note.setAccess(accessType);
+        note.setUser_id(noteService.getUserId());
         noteService.update(note);
         return new RedirectView("/note/list");
     }
-    @GetMapping("/add")
+    @GetMapping("/create")
     public ModelAndView add(){
-        ModelAndView result = new ModelAndView("addAndEdit");
+        ModelAndView result = new ModelAndView("note-create-edit");
         result.addObject("note", null);
         return result;
     }
 
-    @PostMapping("/add")
-    public RedirectView add( @RequestParam String title, @RequestParam String content){
+    @PostMapping("/create")
+    public RedirectView add(@RequestParam String title,
+                             @RequestParam String content,
+                             @RequestParam String accessType){
         Note note = new Note();
         note.setTitle(title);
         note.setContent(content);
+        note.setAccess(accessType);
+        note.setUser_id(noteService.getUserId());
         noteService.add(note);
         return new RedirectView("/note/list");
     }
