@@ -60,5 +60,17 @@ public class NoteController {
         noteService.add(note);
         return new RedirectView("/note/list");
     }
+
+    @GetMapping("/note-share")
+    public ModelAndView share(@RequestParam long id) {
+        ModelAndView result = new ModelAndView("note-share");
+        Note note = noteService.getById(id);
+        if (note.getAccess().equals("public")) {
+            result.addObject("note", note);
+        } else {
+            result.addObject("note", null);
+        }
+        return result;
+    }
 }
 
