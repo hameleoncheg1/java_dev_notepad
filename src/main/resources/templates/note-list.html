@@ -75,9 +75,9 @@
       </div>
       <ul class="col-md-auto list-group list-group-horizontal-md">
         <li class="list-group-item p-1 border-0">
-          <div class="col-md-auto" th:switch="${note.getAccess()}">
-            <span class="btn btn-danger" th:case="'private'">Приватний доступ</span>
-            <span class="btn btn-success" th:case="'public'">Публічний доступ</span>
+          <div class="col-md-auto" th:switch="${note.getAccess().name()}">
+            <span class="btn btn-danger" th:case="'PRIVATE'">Приватний доступ</span>
+            <span class="btn btn-success" th:case="'PUBLIC'">Публічний доступ</span>
           </div>
         </li>
         <li class="list-group-item p-1 border-0">
