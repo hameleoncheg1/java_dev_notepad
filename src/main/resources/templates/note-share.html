@@ -25,8 +25,15 @@
 </head>
   <body>
     <div class="container-sm">
-      <h1 class="mt-2" th:text="${note.title}"></h1>
-      <h2 class="mt-2" th:utext="${note.content}"></h2>
+      <div th:if="${note != null}">
+       <h1 class="mt-2" th:text="${note.title}"></h1>
+       <h2 class="mt-2" th:utext="${note.content}"></h2>
+      </div>
+      <div th:unless="${note != null}">
+        <div class="row justify-content-center align-items-center">
+          Такої нотатки не існує :(
+        </div>
+        </div>
     </div>
   </body>
 </html>
