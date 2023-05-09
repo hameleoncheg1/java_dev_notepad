@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic&amp;display=swap">
+    <link rel="stylesheet" href="/assets/css/login-form-styles.css">
+    <link rel="stylesheet" href="/assets/css/login-form.css">
+</head>
+
+<body id="page-top">
+<div class="alert alert-danger" role="alert" th:if="${isValidName} == false">
+    Помилка - логін може містити будь-які символи латиниці та цифри. Довжина – від 5 до 50 символів
+</div>
+<div class="alert alert-danger" role="alert" th:if="${isValidPass} == false">
+    Помилка - пароль має бути від 8 до 100 символів
+</div>
+<div class="alert alert-danger" role="alert" th:if="${userAlreadyExists} != null">
+    Логін <b th:text="${userAlreadyExists}"></b> вже зайнятий. Спробуйте ще раз.
+</div>
+    <header class="d-flex masthead" style="background-image:url('/assets/img/bg-callout.jpg');">
+        <div class="container full-height">
+            <div class="row flex center v-center full-height">
+                <div class="col-8 col-sm-4">
+                    <div class="form-box" style="height: 400px;">
+                        <form>
+                            <fieldset>
+                                <legend>Реєстрація</legend><img id="avatar" class="avatar round" src="assets/img/avatar.png">
+                                <input class="form-control" type="email" id="username" name="username" placeholder="Логін">
+                                <input class="form-control" type="password" id="password" name="password" placeholder="Пароль">
+                                <button class="btn btn-primary d-block w-100" type="submit" style="margin-bottom: 10px;">Зареєструватися</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/stylish-portfolio.js"></script>
