@@ -1,4 +1,5 @@
 package go.it.java_notepad.service;
+
 import go.it.java_notepad.entity.Note;
 import go.it.java_notepad.entity.User;
 import go.it.java_notepad.repository.NoteRepository;
@@ -8,8 +9,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Service
 public class NoteService {
@@ -28,10 +32,7 @@ public class NoteService {
     }
 
     public Note add(Note note) {
-        long id = random.nextLong();
-        note.setId(id);
-        note.setUser_id(1L);
-        note.setAccess("private");
+        note.setId(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
         noteRepository.save(note);
         return note;
     }
@@ -47,7 +48,6 @@ public class NoteService {
         }
         noteRepository.save(note);
     }
-
     public Note getById(long id) {
         Note note;
         try {
@@ -62,4 +62,13 @@ public class NoteService {
         final User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return principal.getUser_id();
     }
+
+    public boolean isTitleValid(Note note) {
+        return note.getTitle().length() >= 5 && note.getTitle().length() <= 100;
+    }
+
+    public boolean isContentValid(Note note) {
+        return note.getContent().length() >= 5 && note.getContent().length() <= 10000;
+    }
+
 }

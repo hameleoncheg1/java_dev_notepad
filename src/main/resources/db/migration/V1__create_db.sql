@@ -7,10 +7,10 @@ CREATE TABLE users (
 );
 
 CREATE TABLE note(
-     ID INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-     title VARCHAR (255),
-     content VARCHAR (2048),
-     access VARCHAR (2048) CHECK (access IN ('private', 'public')),
+     ID BIGINT PRIMARY KEY,
+     title VARCHAR (100),
+     content VARCHAR (10000),
+     access VARCHAR (10),
      USER_ID INT  NOT NULL,
      FOREIGN KEY (USER_ID) REFERENCES users (USER_ID) ON DELETE CASCADE
 );
