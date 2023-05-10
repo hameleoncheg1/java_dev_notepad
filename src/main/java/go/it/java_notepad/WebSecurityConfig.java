@@ -41,7 +41,7 @@ private final CustomAuthProvider authProvider;
                 .and()
                     .formLogin()
                     .loginPage("/login")
-                .defaultSuccessUrl("/note/list")
+//                .defaultSuccessUrl("/note/list")
                     .permitAll()
         ;
 

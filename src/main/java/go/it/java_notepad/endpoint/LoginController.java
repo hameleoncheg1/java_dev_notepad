@@ -1,6 +1,8 @@
 package go.it.java_notepad.endpoint;
 
 import go.it.java_notepad.entity.User;
+import go.it.java_notepad.service.LoginService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -14,25 +16,28 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/login")
 public class LoginController {
+
+    private final LoginService loginService;
+
     @PostMapping
-    public RedirectView login(@RequestParam String username,
+    public ModelAndView login(@RequestParam String username,
                                     @RequestParam String password){
-
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        Authentication authentication =
-                new TestingAuthenticationToken(username, password, "ROLE_USER");
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
-
-
-        return new RedirectView("/note/list");
+        System.out.println("3333333333333333333333333333");
+        if(!loginService.userAuthentication(username, password)){
+            System.out.println("!!!!!!!!!!!!!!!!");
+            return new ModelAndView("note-create-edit-error-page");
+        }
+        System.out.println("@@@@@@@@@@@@@@@@@@@");
+        return new ModelAndView("/note/list");
     }
 
     @GetMapping
     public ModelAndView login(){
-                ModelAndView result = new ModelAndView("login");
+        System.out.println("qwerty");
+                ModelAndView result = new ModelAndView("/login");
         return result;
     }
 //    @PostMapping("")

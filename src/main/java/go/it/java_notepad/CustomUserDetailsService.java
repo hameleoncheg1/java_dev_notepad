@@ -25,7 +25,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(1);
+
+
         UserData userData = getByIdOrNull(username);
         if (userData == null) {
             throw new UsernameNotFoundException(username);
@@ -69,16 +70,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                 return true;
             }
         };
-
-        System.out.println("Creating user");
-        System.out.println("result.getUsername() = " + result.getUsername());
-        System.out.println("result.getPassword() = " + result.getPassword());
-
         return result;
     }
 
     private UserData getByIdOrNull(String username) {
-        System.out.println(2);
         String sql = "SELECT password, role FROM USERS WHERE email = :username";
         return jdbcTemplate.queryForObject(
                 sql,

@@ -1,6 +1,7 @@
 package go.it.java_notepad;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +22,6 @@ public class CustomAuthProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
-
         UserDetails user = userDetailsPasswordService.loadUserByUsername(username);
         return checkPassword(user, password);
     }
@@ -41,7 +41,7 @@ public class CustomAuthProvider implements AuthenticationProvider {
 
             return new UsernamePasswordAuthenticationToken(innerUser, user.getPassword(), user.getAuthorities());
         } else {
-            throw new BadCredentialsException("Bad credentials");
+                throw new BadCredentialsException("Bad credentials");
         }
     }
 }
