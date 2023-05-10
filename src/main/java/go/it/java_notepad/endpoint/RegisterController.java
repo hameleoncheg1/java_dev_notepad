@@ -19,21 +19,11 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/")
 public class RegisterController {
     private final UserRepository userRepository;
-//    @GetMapping("/login")
-//    public ModelAndView login() {
-//        return new ModelAndView("login");
-//    }
-//
-//    @PostMapping("/login")
-//    public RedirectView registerAdd() {
-//        return new RedirectView("/note/list");
-//    }
 
     @GetMapping("/register")
     public ModelAndView register() {
         return new ModelAndView("register");
     }
-
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -48,15 +38,4 @@ public class RegisterController {
         userRepository.save(user);
         return new RedirectView("/login");
     }
-//    @PostMapping("/register")
-//    public RedirectView registerAdd(@RequestParam String username,
-//                                    @RequestParam String password) {
-//        User user = new User();
-//        user.setUsername(username);
-//        user.setPassword("{noop}"+password);
-//        user.setRole("ROLE_USER");
-//        user.setEnabled(1);
-//        userRepository.save(user);
-//        return new RedirectView("/login");
-//    }
 }

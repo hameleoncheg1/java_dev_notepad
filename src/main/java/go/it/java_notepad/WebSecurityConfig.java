@@ -41,9 +41,9 @@ private final CustomAuthProvider authProvider;
                 .and()
                     .formLogin()
                     .loginPage("/login")
-//                .defaultSuccessUrl("/note/list")
+                    .defaultSuccessUrl("/note/list")
                     .permitAll()
-        ;
+                .and();
 
         return http.build();
     }
@@ -65,9 +65,4 @@ private final CustomAuthProvider authProvider;
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
-//    @Bean
-//    public UserDetailsService userDetailsService(){
-//        return userRepository::findByUsername;
-//    }
-//
 }
