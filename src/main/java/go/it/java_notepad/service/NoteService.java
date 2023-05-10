@@ -2,6 +2,7 @@ package go.it.java_notepad.service;
 import go.it.java_notepad.entity.Note;
 import go.it.java_notepad.entity.User;
 import go.it.java_notepad.repository.NoteRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -48,8 +49,10 @@ public class NoteService {
     }
 
     public Note getById(long id) {
-        Note note = noteRepository.getReferenceById(id);
-        if (note == null) {
+        Note note;
+        try {
+            note = noteRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        } catch (EntityNotFoundException e) {
             throw new IllegalArgumentException("Note with id=" + id + " does not exist");
         }
         return note;
