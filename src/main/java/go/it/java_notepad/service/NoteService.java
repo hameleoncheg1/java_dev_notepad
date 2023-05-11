@@ -3,6 +3,7 @@ package go.it.java_notepad.service;
 import go.it.java_notepad.entity.Note;
 import go.it.java_notepad.entity.User;
 import go.it.java_notepad.repository.NoteRepository;
+import go.it.java_notepad.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,7 @@ public class NoteService {
 
     private final NoteRepository noteRepository;
     private final Random random = new Random();
+    private final UserRepository userRepository;
 
     public List<Note> listAll() {
         return noteRepository.findAll();
@@ -57,8 +59,15 @@ public class NoteService {
         }
     }
 
+//    public Long getUserId() {
+//        final User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        return principal.getUser_id();
+//    }
+
     public Long getUserId() {
-        final User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        final User principal = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        System.out.println(principal.getUser_id());
         return principal.getUser_id();
     }
 
