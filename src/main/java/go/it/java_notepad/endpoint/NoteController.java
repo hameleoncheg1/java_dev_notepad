@@ -90,7 +90,7 @@ public class NoteController {
     @GetMapping("/note-share")
     public ModelAndView share(@RequestParam long id) {
         ModelAndView result = new ModelAndView("note-share");
-        Note note = null;
+        Note note;
         try {
             note = noteService.getById(id);
         } catch (IllegalArgumentException e) {
@@ -98,7 +98,7 @@ public class NoteController {
             result.addObject("note", null);
             return result;
         }
-        if (note.getAccess().equals("public")) {
+        if (note.getAccess().equals(AccessType.PUBLIC)) {
             result.addObject("note", note);
         } else {
             result.addObject("note", null);
