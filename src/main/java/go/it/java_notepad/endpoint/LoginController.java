@@ -22,12 +22,17 @@ import org.springframework.web.servlet.view.RedirectView;
 public class LoginController {
 
     private final LoginService loginService;
+    @GetMapping("/")
+    public RedirectView defaultPlaceForSiteUrl  () {
+
+        return loginService.checkAuthentication();
+    }
 
     @GetMapping("/login")
-    public ModelAndView loginError(@RequestParam(required = false) Object error,
+    public ModelAndView login(@RequestParam(required = false) Object error,
                                    @RequestParam(required = false) Object logout,
-                                   @RequestParam(required = false, name = "continue") Object cu) {
+                                   @RequestParam(required = false, name = "continue") Object cont) {
 
-        return loginService.handlerLogin(error, logout, cu);
+        return loginService.handlerLogin(error, logout, cont);
     }
 }

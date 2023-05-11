@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RequiredArgsConstructor
 @Service
@@ -28,26 +29,27 @@ public class LoginService {
         return new ModelAndView("/login");
     }
 
-    public boolean userAuthentication(String username, String password){
+//    public boolean userAuthentication(String username, String password){
+//
+//        if(checkUser(username)){
+//        SecurityContext context = SecurityContextHolder.createEmptyContext();
+//        Authentication authentication =
+//                new TestingAuthenticationToken(username, password, "ROLE_USER");
+//        context.setAuthentication(authentication);
+//        SecurityContextHolder.setContext(context);
+//        return true;
+//        }
+//        return false;
+//    }
 
-        if(checkUser(username)){
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        Authentication authentication =
-                new TestingAuthenticationToken(username, password, "ROLE_USER");
-        context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
-        return true;
-        }
-        return false;
-    }
-
-    private boolean checkUser(String username){
-        User user = userRepository.findByUsername(username);
-
+    public RedirectView checkAuthentication(){
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        System.out.println(user);
         if (user != null){
-            return true;
+            return new RedirectView("/note/list");
         } else {
-            return false;
+            return new RedirectView("/login");
         }
     }
 
