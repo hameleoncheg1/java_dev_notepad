@@ -50,11 +50,13 @@ public class NoteService {
     }
 
     public Note getById(long id) {
+        Note note;
         try {
-            return noteRepository.getReferenceById(id);
-        } catch (EntityNotFoundException ex) {
+            note = noteRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        } catch (EntityNotFoundException e) {
             throw new IllegalArgumentException("Note with id=" + id + " does not exist");
         }
+        return note;
     }
 
     public Long getUserId() {
