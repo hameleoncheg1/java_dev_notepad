@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/note")
@@ -54,7 +55,7 @@ public class NoteController {
             return modelAndView.addObject("cause", "title");
         }
         if (!noteService.isContentValid(note)) {
-            return modelAndView.addObject("cause","content");
+            return modelAndView.addObject("cause", "content");
         }
         noteService.update(note);
         return this.list();
@@ -80,7 +81,7 @@ public class NoteController {
             return modelAndView.addObject("cause", "title");
         }
         if (!noteService.isContentValid(note)) {
-            return modelAndView.addObject("cause","content");
+            return modelAndView.addObject("cause", "content");
         }
         noteService.add(note);
         return this.list();
@@ -89,7 +90,14 @@ public class NoteController {
     @GetMapping("/note-share")
     public ModelAndView share(@RequestParam long id) {
         ModelAndView result = new ModelAndView("note-share");
-        Note note = noteService.getById(id);
+        Note note = null;
+        try {
+            note = noteService.getById(id);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            result.addObject("note", null);
+            return result;
+        }
         if (note.getAccess().equals("public")) {
             result.addObject("note", note);
         } else {
@@ -98,5 +106,4 @@ public class NoteController {
         return result;
     }
 }
-
 
