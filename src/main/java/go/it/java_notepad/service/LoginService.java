@@ -29,19 +29,6 @@ public class LoginService {
         return new ModelAndView("/login");
     }
 
-//    public boolean userAuthentication(String username, String password){
-//
-//        if(checkUser(username)){
-//        SecurityContext context = SecurityContextHolder.createEmptyContext();
-//        Authentication authentication =
-//                new TestingAuthenticationToken(username, password, "ROLE_USER");
-//        context.setAuthentication(authentication);
-//        SecurityContextHolder.setContext(context);
-//        return true;
-//        }
-//        return false;
-//    }
-
     public RedirectView checkAuthentication(){
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());

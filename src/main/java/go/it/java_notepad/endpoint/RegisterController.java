@@ -2,7 +2,6 @@ package go.it.java_notepad.endpoint;
 
 import go.it.java_notepad.entity.User;
 import go.it.java_notepad.repository.UserRepository;
-import go.it.java_notepad.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

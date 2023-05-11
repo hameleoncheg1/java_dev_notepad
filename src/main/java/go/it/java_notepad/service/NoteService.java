@@ -61,14 +61,8 @@ public class NoteService {
         return note;
     }
 
-//    public Long getUserId() {
-//        final User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        return principal.getUser_id();
-//    }
-
     public Long getUserId() {
         final User principal = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        System.out.println(principal.getUser_id());
         return principal.getUser_id();
     }
 
