@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -70,6 +69,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                 return true;
             }
         };
+
+        System.out.println("Creating user");
+        System.out.println("result.getUsername() = " + result.getUsername());
+        System.out.println("result.getPassword() = " + result.getPassword());
         return result;
     }
 
@@ -97,6 +100,5 @@ public class CustomUserDetailsService implements UserDetailsService {
     private static class UserData {
         private String password;
         private String authority;
-
     }
 }

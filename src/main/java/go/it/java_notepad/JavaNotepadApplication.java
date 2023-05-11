@@ -9,5 +9,4 @@ public class JavaNotepadApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(JavaNotepadApplication.class, args);
 	}
-
 }
