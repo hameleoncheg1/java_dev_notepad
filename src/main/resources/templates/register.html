@@ -12,7 +12,6 @@
 </head>
 
 <body id="page-top">
-    
     <header class="d-flex masthead" style="background-image:url('assets/img/bg-masthead.jpg');">
         <div class="container full-height">
             <div class="row flex center v-center full-height">
@@ -22,10 +21,11 @@
                             <fieldset>
                                 <legend>Реєстрація</legend>
                                 <img id="avatar" class="avatar round" src="assets/img/avatar.png">
-                                <input class="form-control" type="email" id="username" name="username" placeholder="Логін" maxlength="50">
-                                <input class="form-control" type="password" id="password" name="password" placeholder="Пароль" minlength="8"  maxlength="100">
+                                <input class="form-control" type="text" id="username" name="username" placeholder="Логін">
+                                <input class="form-control" type="password" id="password" name="password" placeholder="Пароль">
                                 <button class="btn btn-primary d-block w-100" type="submit" style="margin-bottom: 10px;">Зареєструватися</button>
                                 <button class="btn btn-primary d-block w-100" type="button" onclick="window.location.href='/login'">Назад</button>
+                                <div th:text="${error}"></div>
                             </fieldset>
                         </form>
                     </div>
