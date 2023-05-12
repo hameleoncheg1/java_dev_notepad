@@ -12,8 +12,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -24,7 +26,12 @@ public class NoteService {
     private final UserRepository userRepository;
 
     public List<Note> listAll() {
-        return noteRepository.findAll();
+        String user = SecurityContextHolder.getContext().getAuthentication().getName();
+        User userObject = userRepository.findByUsername(user);
+        return noteRepository.findAll()
+                .stream()
+                .filter(o -> Objects.equals(o.getUser_id(), userObject.getUser_id()))
+                .collect(Collectors.toList());
     }
 
     public String author() {
