@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RequiredArgsConstructor
 @Service
@@ -39,6 +40,6 @@ public class RegisterService {
         user.setEnabled(1);
         userRepository.save(user);
 
-        return new ModelAndView("/login");
+        return new ModelAndView(new RedirectView("/login"));
     }
 }
