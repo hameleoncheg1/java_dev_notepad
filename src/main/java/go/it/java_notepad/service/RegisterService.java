@@ -19,22 +19,22 @@ public class RegisterService {
 
     public ModelAndView handlerRegister (String username, String password){
         if ((5 > username.length() | username.length() > 50) & (8 > password.length() | password.length() > 100)) {
-            return new ModelAndView("/register")
+            return new ModelAndView("register")
                     .addObject("error",
                             "Помилка - і'мя користувача повинно бути від 5 до 20 символів," +
                                     " пароль користувача повинен бути від 8 до 100 символів");
         }
         if (5 > username.length() | username.length() > 50) {
-            return new ModelAndView("/register")
+            return new ModelAndView("register")
                     .addObject("error",
                             "Помилка - і'мя користувача повинно бути від 5 до 20 символів");
         }
         if (8 > password.length() | password.length() > 100) {
-            return new ModelAndView("/register").addObject("error",
+            return new ModelAndView("register").addObject("error",
                     "Помилка - пароль користувача повинен бути від 8 до 100 символів");
         }
         if (userRepository.findByUsername(username) != null) {
-            return new ModelAndView("/register").addObject("error",
+            return new ModelAndView("register").addObject("error",
                     "Такий користувач вже є");
         }
         User user = new User();
@@ -44,6 +44,6 @@ public class RegisterService {
         user.setEnabled(1);
         userRepository.save(user);
 
-        return new ModelAndView(new RedirectView("/login"));
+        return new ModelAndView(new RedirectView("login"));
     }
 }
