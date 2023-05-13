@@ -24,9 +24,9 @@ public class LoginService {
             return noteController.list();
         }
         if(error != null) {
-            return new ModelAndView("/login").addObject("message", "Невірні данні");
+            return new ModelAndView("login").addObject("message", "Невірні данні");
         }
-        return new ModelAndView("/login");
+        return new ModelAndView("login");
     }
 
     public RedirectView checkAuthentication(){
@@ -34,9 +34,9 @@ public class LoginService {
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         System.out.println(user);
         if (user != null){
-            return new RedirectView("/note/list");
+            return new RedirectView("note/list");
         } else {
-            return new RedirectView("/login");
+            return new RedirectView("login");
         }
     }
 
