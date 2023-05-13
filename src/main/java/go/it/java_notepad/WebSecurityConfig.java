@@ -34,8 +34,6 @@ public class WebSecurityConfig {
                         .anyRequest()
                         .authenticated()
                 .and()
-                .httpBasic()
-                .and()
                     .formLogin()
                     .loginPage("/login")
                     .defaultSuccessUrl("/note/list")
