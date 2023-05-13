@@ -33,6 +33,10 @@ public class RegisterService {
             return new ModelAndView("/register").addObject("error",
                     "Помилка - пароль користувача повинен бути від 8 до 100 символів");
         }
+        if (userRepository.findByUsername(username) != null) {
+            return new ModelAndView("/register").addObject("error",
+                    "Такий користувач вже є");
+        }
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
