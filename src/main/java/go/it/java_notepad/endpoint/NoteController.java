@@ -58,7 +58,7 @@ public class NoteController {
             return modelAndView.addObject("cause", "content");
         }
         noteService.update(note);
-        return this.list();
+        return new ModelAndView(new RedirectView("/note/list"));
     }
 
     @GetMapping("/create")
@@ -84,7 +84,7 @@ public class NoteController {
             return modelAndView.addObject("cause", "content");
         }
         noteService.add(note);
-        return this.list();
+        return new ModelAndView(new RedirectView("/note/list"));
     }
 
     @GetMapping("/note-share")
