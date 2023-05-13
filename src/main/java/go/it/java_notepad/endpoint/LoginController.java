@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 public class LoginController {
 
     private final LoginService loginService;
-    @GetMapping("/")
+    @GetMapping(value = {"/", "/error"})
     public RedirectView defaultPlaceForSiteUrl  () {
         return loginService.checkAuthentication();
     }

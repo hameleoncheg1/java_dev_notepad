@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RequiredArgsConstructor
 @Service
@@ -32,6 +33,10 @@ public class RegisterService {
             return new ModelAndView("/register").addObject("error",
                     "Помилка - пароль користувача повинен бути від 8 до 100 символів");
         }
+        if (userRepository.findByUsername(username) != null) {
+            return new ModelAndView("/register").addObject("error",
+                    "Такий користувач вже є");
+        }
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
@@ -39,6 +44,6 @@ public class RegisterService {
         user.setEnabled(1);
         userRepository.save(user);
 
-        return new ModelAndView("/login");
+        return new ModelAndView(new RedirectView("/login"));
     }
 }
