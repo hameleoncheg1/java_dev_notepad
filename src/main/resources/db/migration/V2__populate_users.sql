@@ -5,5 +5,5 @@ VALUES ('syrovatkaaroslav@gmail.com',
 
 INSERT INTO USERS (EMAIL, PASSWORD, ROLE, ENABLED)
 VALUES ('hameleoncheg@gmail.com',
-'{noop}$2a$04$mVKjSMt6LHzo/v5sPbdxIuuXpU9NoBRXNeYmfyaA1JIT9E7TTiIdO',
+'{bcrypt}$2a$04$mVKjSMt6LHzo/v5sPbdxIuuXpU9NoBRXNeYmfyaA1JIT9E7TTiIdO',
 'ROLE_ADMIN', 1);
