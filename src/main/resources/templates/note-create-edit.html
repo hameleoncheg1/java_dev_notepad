@@ -43,12 +43,12 @@
     <div class="float-lg-start w-50">
       <div class="col-4 ">
         <input class="form-check-input" type="radio" name="accessType" value="private" id="private"
-               th:checked="${note == null || (note != null && note.getAccessType =='private')}">
+               th:checked="${note == null || note?.getAccess() != 'PRIVATE'}">
         <label class="form-check-label" for="private">
           Private
         </label>
         <input class="form-check-input" type="radio" name="accessType" value="public" id="public"
-               th:checked="${note != null && note.getAccessType =='public'}">
+               th:checked="${note != null && note?.getAccess() == 'PUBLIC'}">
         <label class="form-check-label" for="public">
           Public
         </label>
@@ -64,6 +64,10 @@
     </div>
     <input type="hidden" name="id" th:value="${note?.id}" />
   </form>
+
+</div>
+<div th:text="${note?.getAccess()}">
+
 </div>
 </body>
 </html>
