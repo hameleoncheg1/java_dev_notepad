@@ -44,6 +44,6 @@ public class RegisterService {
         user.setEnabled(1);
         userRepository.save(user);
 
-        return new ModelAndView(new RedirectView("login"));
+        return new ModelAndView(new RedirectView("/login"));
     }
 }
