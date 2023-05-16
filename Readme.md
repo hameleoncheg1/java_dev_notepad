@@ -58,4 +58,4 @@ on GitHub.
 
 ### Error note page
 
-![edit](./readme_img/error.png)
+![error](./readme_img/error.png)
